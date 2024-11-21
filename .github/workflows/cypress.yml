@@ -1,4 +1,4 @@
-name: E2E Playwright
+name: E2E Cypress
 on:
   workflow_call:
     inputs:
@@ -53,7 +53,7 @@ jobs:
         id: version
         if: ${{ inputs.shopwareVersion == '.auto' }}
       - name: Setup Shopware
-        uses: shopware/setup-shopware@v2
+        uses: shopware/setup-shopware@main
         with:
           shopware-version: ${{ steps.version.outputs.shopware-version || inputs.shopwareVersion }}
           php-version: ${{ inputs.phpVersion }}
@@ -86,10 +86,8 @@ jobs:
           composer require $(composer -d custom/plugins/${{ inputs.extensionName }} config name)
           ./bin/console plugin:refresh
           ./bin/console plugin:install ${{ inputs.extensionName }} --activate --clearCache
-      - name: Run E2E test with Playwright
+      - name: Run E2E test with Cypress
         working-directory: custom/plugins/${{ inputs.extensionName }}/${{ inputs.e2ePath }}
         run: |
           npm install
-          npx playwright install
-          npx playwright install-deps  
-          npx playwright test
+          CYPRESS_baseUrl=http://localhost:8000 node_modules/.bin/cypress run --browser chrome

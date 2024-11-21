@@ -1,4 +1,4 @@
-name: E2E Playwright
+name: E2E Tests
 on:
   workflow_call:
     inputs:
@@ -10,6 +10,14 @@ on:
         description: "Path to your e2e tests"
         required: true
         type: string
+      e2eTestFramework:
+        description: "Choose the test framework to run"
+        required: true
+        type: string
+        default: "cypress"
+        options:
+          - playwright
+          - cypress
       shopwareVersion:
         description: |
           With the default `.auto`, the workflow tries to find a shopware version using the shopware-version action.
@@ -46,6 +54,9 @@ jobs:
   run:
     name: Tests
     runs-on: ubuntu-latest
+    env:
+      SHOPWARE_ACCESS_KEY_ID: ${{ secrets.SHOPWARE_ACCESS_KEY_ID }}
+      SHOPWARE_SECRET_ACCESS_KEY: ${{ secrets.SHOPWARE_SECRET_ACCESS_KEY }}
     steps:
       - uses: shopware/github-actions/shopware-version@main
         with:
@@ -86,10 +97,17 @@ jobs:
           composer require $(composer -d custom/plugins/${{ inputs.extensionName }} config name)
           ./bin/console plugin:refresh
           ./bin/console plugin:install ${{ inputs.extensionName }} --activate --clearCache
-      - name: Run E2E test with Playwright
+      - name: Run E2E test
         working-directory: custom/plugins/${{ inputs.extensionName }}/${{ inputs.e2ePath }}
         run: |
           npm install
-          npx playwright install
-          npx playwright install-deps  
-          npx playwright test
+          if [ "${{ inputs.e2eTestFramework }}" == "playwright" ]; then
+            npx playwright install
+            npx playwright install-deps
+            APP_URL=http://localhost:8000 npx playwright test
+          elif [ "${{ inputs.e2eTestFramework }}" == "cypress" ]; then
+            CYPRESS_baseUrl=http://localhost:8000 node_modules/.bin/cypress run --browser chrome
+          else
+            echo "Invalid test framework specified. Please choose either 'cypress' or 'playwright'."
+            exit 1
+          fi

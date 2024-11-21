@@ -9,8 +9,9 @@ on:
     - cron: '0 3 * * *'
 jobs:
   e2etest:
-    uses: ./.github/workflows/playwright.yml
+    uses: ./.github/workflows/e2e.yml
     with:
       extensionName: ${{ github.event.repository.name }}
       e2ePath: tests/acceptance
+      e2eTestFramework: cypress
       shopwareVersion: trunk
