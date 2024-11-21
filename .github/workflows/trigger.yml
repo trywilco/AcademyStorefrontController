@@ -13,5 +13,5 @@ jobs:
     with:
       extensionName: ${{ github.event.repository.name }}
       e2ePath: tests/acceptance
-      e2eTestFramework: cypress
+      e2eTestFramework: playwright
       shopwareVersion: trunk
