@@ -11,13 +11,10 @@ on:
         required: true
         type: string
       e2eTestFramework:
-        description: "Choose the test framework to run"
+        description: "Choose the test framework to run (playwright or cypress)"
         required: true
         type: string
         default: "cypress"
-        options:
-          - playwright
-          - cypress
       shopwareVersion:
         description: |
           With the default `.auto`, the workflow tries to find a shopware version using the shopware-version action.
