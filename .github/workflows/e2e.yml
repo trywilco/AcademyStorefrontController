@@ -101,7 +101,7 @@ jobs:
           if [ "${{ inputs.e2eTestFramework }}" == "playwright" ]; then
             npx playwright install
             npx playwright install-deps
-            APP_URL=http://localhost:8000 npx playwright test
+            npx playwright test
           elif [ "${{ inputs.e2eTestFramework }}" == "cypress" ]; then
             CYPRESS_baseUrl=http://localhost:8000 node_modules/.bin/cypress run --browser chrome
           else
