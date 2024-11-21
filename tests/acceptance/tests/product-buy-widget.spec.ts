@@ -1,58 +1,19 @@
-import {test, expect} from './BaseTestFile';
+import {expect, test} from './BaseTestFile';
 
-const PRODUCT_UUID = "b7d2554b0ce847cd82f3ac9bd1c0dfca";
-
-async function fetchDefaultTax(AdminApiContext: any) {
-    const taxResponse = await AdminApiContext.get('./tax');
-    const {data: taxData} = await taxResponse.json();
-    return taxData[0] ? taxData[0].id : null;
+function wait(ms: number): Promise<void> {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function fetchStorefrontSalesChannel(AdminApiContext: any) {
-    const salesChannelResponse = await AdminApiContext.get('./sales-channel');
-    const {data: salesChannelData} = await salesChannelResponse.json();
-    const storefrontSalesChannel = salesChannelData.find((channel: any) => channel.typeId === '8a243080f92e4c719546314b577cf82b');
-    return storefrontSalesChannel ? storefrontSalesChannel.id : null;
-}
+test('Plugin test scenario.', async ({page, TestDataService, DefaultSalesChannel}) => {
 
-async function deleteProduct(AdminApiContext: any, productId: string) {
-    await AdminApiContext.delete(`./product/${productId}`);
-}
+    // Create a basic product
+    const basicProduct = await TestDataService.createBasicProduct();
 
-test('Plugin test scenario.', async ({AdminApiContext, page}) => {
-    const firstTaxId = await fetchDefaultTax(AdminApiContext);
-    expect(firstTaxId).not.toBeNull();
+    // Open the product detail page
+    await page.goto(`${DefaultSalesChannel.url}/detail/${basicProduct.id}`);
 
-    const storefrontSalesChannelId = await fetchStorefrontSalesChannel(AdminApiContext);
-    expect(storefrontSalesChannelId).not.toBeNull();
-
-    const productResponse = await AdminApiContext.post('./product', {
-        data: {
-            id: PRODUCT_UUID,
-            name: "New Academy Playwright Product",
-            productNumber: "ACADEMY-DEMO-001",
-            stock: 100,
-            price: [{
-                currencyId: PRODUCT_UUID,
-                gross: 19.99,
-                net: 16.80,
-                linked: false
-            }],
-            taxId: firstTaxId,
-            active: true,
-            visibilities: [{
-                salesChannelId: storefrontSalesChannelId,
-                visibility: 30
-            }]
-        }
-    });
-
-    expect(productResponse.status()).toBe(204);
-
-    await page.goto('http://production.local/detail/c7bca22753c84d08b6178a50052b4146');
-
+    // Wait for the page to load and check for a link with the class "open-image-modal"
     const openImageModalLink = page.locator('a.open-image-modal');
-    await expect(openImageModalLink).toHaveCount(1);
 
-    await deleteProduct(AdminApiContext, PRODUCT_UUID);
+    await expect(openImageModalLink).toHaveCount(1);
 });
