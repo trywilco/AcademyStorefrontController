@@ -1,0 +1,16 @@
+name: E2E test
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * *'
+jobs:
+  e2etest:
+    uses: ./.github/workflows/playwright.yml
+    with:
+      extensionName: ${{ github.event.repository.name }}
+      e2ePath: tests/acceptance
+      shopwareVersion: trunk
