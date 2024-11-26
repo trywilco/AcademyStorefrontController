@@ -4,9 +4,9 @@ use Shopware\Core\TestBootstrapper;
 
 $loader = (new TestBootstrapper())
     ->addCallingPlugin()
-    ->addActivePlugins('StorefrontControllerPlugin')
+    ->addActivePlugins('AcademyStorefrontController')
     ->setForceInstallPlugins(true)
     ->bootstrap()
     ->getClassLoader();
 
-$loader->addPsr4('StorefrontControllerPlugin\\Tests\\', __DIR__);
+$loader->addPsr4('AcademyStorefrontController\\StorefrontController\\Tests\\', __DIR__);

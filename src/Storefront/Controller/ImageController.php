@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace StorefrontControllerPlugin\Storefront\Controller;
+namespace ShopwareAcademy\StorefrontController\Storefront\Controller;
 
 use GuzzleHttp\Client;
 use Shopware\Core\System\SalesChannel\SalesChannelContext;
@@ -29,18 +29,19 @@ class ImageController extends StorefrontController
     )]
     public function showImage(Request $request, SalesChannelContext $context): Response
     {
-        $unsplashAccessKey = $this->systemConfigService->get('StorefrontControllerPlugin.config.unsplashAccessKey');
+        $apiAccessKey = $this->systemConfigService->get('AcademyStorefrontController.config.apiAccessKey');
+        $apiProvider = $this->systemConfigService->get('AcademyStorefrontController.config.apiProvider');
 
-        $response = $this->client->request('GET', 'https://api.unsplash.com/photos/random', [
+        $response = $this->client->request('GET', 'https://api.'.$apiProvider.'.com/v1/images/search', [
             'headers' => [
-                'Authorization' => 'Client-ID ' . $unsplashAccessKey
+                'x-api-key' => $apiAccessKey
             ]
         ]);
 
         $data = json_decode($response->getBody()->getContents(), true);
-        $imageUrl = $data['urls']['regular'];
+        $imageUrl = $data[0]['url'];
 
-        return $this->renderStorefront('@StorefrontControllerPlugin/storefront/page/image.html.twig', [
+        return $this->renderStorefront('@AcademyStorefrontController/storefront/page/image.html.twig', [
             'imageUrl' => $imageUrl
         ]);
     }
