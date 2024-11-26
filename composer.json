@@ -8,7 +8,7 @@
         "shopware/core": "~6.6.0"
     },
     "extra": {
-        "shopware-plugin-class": "AcademyStorefrontController\\AcademyStorefrontController",
+        "shopware-plugin-class": "ShopwareAcademy\\StorefrontController\\AcademyStorefrontController",
         "label": {
             "de-DE": "Plugin mit eigenem Storefront Controller",
             "en-GB": "Plugin with custom storefront controller"
@@ -16,12 +16,12 @@
     },
     "autoload": {
         "psr-4": {
-            "AcademyStorefrontController\\": "src/"
+            "ShopwareAcademy\\StorefrontController\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "AcademyStorefrontController\\Tests\\": "tests/"
+            "ShopwareAcademy\\StorefrontController\\Tests\\": "tests/"
         }
     }
 }

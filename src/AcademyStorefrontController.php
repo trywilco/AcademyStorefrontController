@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace AcademyStorefrontController;
+namespace ShopwareAcademy\StorefrontController;
 
 use Shopware\Core\Framework\Plugin;
 use Shopware\Core\Framework\Plugin\Context\ActivateContext;

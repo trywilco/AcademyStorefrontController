@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace AcademyStorefrontController\Storefront\Controller;
+namespace ShopwareAcademy\StorefrontController\Storefront\Controller;
 
 use GuzzleHttp\Client;
 use Shopware\Core\System\SalesChannel\SalesChannelContext;
