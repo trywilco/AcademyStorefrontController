@@ -5,12 +5,6 @@
 
     <card>
         <title>API settings</title>
-
-        <input-field type="password">
-            <name>apiAccessKey</name>
-            <label>Access Key</label>
-        </input-field>
-
         <input-field type="single-select">
             <name>apiProvider</name>
             <label>Are you a cat or dog person?</label>
@@ -25,6 +19,12 @@
                 </option>
             </options>
             <defaultValue>thedogapi</defaultValue>
+        </input-field>
+
+        <input-field type="password">
+            <name>apiAccessKey</name>
+            <label>Access Key</label>
+            <helpText>You don't need an API key to get a single image. This input is optional for > 10 images. https://developers.thecatapi.com</helpText>
         </input-field>
     </card>
 

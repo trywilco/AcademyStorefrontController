@@ -1,5 +1,5 @@
 {
-    "name": "academy/storefront-controller",
+    "name": "shopware-academy/storefront-controller",
     "description": "Storefront plugin with custom functionality",
     "type": "shopware-platform-plugin",
     "version": "1.0.0",
@@ -8,7 +8,7 @@
         "shopware/core": "~6.6.0"
     },
     "extra": {
-        "shopware-plugin-class": "StorefrontControllerPlugin\\StorefrontControllerPlugin",
+        "shopware-plugin-class": "AcademyStorefrontController\\AcademyStorefrontController",
         "label": {
             "de-DE": "Plugin mit eigenem Storefront Controller",
             "en-GB": "Plugin with custom storefront controller"
@@ -16,12 +16,12 @@
     },
     "autoload": {
         "psr-4": {
-            "StorefrontControllerPlugin\\": "src/"
+            "AcademyStorefrontController\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "StorefrontControllerPlugin\\Tests\\": "tests/"
+            "AcademyStorefrontController\\Tests\\": "tests/"
         }
     }
 }

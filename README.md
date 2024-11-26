@@ -1,4 +1,4 @@
-# StorefrontControllerPlugin
+# AcademyStorefrontController
 
 A plugin which shows how to create a simple Storefront controller
 

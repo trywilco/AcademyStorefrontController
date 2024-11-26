@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace StorefrontControllerPlugin\Storefront\Controller;
+namespace AcademyStorefrontController\Storefront\Controller;
 
 use GuzzleHttp\Client;
 use Shopware\Core\System\SalesChannel\SalesChannelContext;
@@ -29,8 +29,8 @@ class ImageController extends StorefrontController
     )]
     public function showImage(Request $request, SalesChannelContext $context): Response
     {
-        $apiAccessKey = $this->systemConfigService->get('StorefrontControllerPlugin.config.apiAccessKey');
-        $apiProvider = $this->systemConfigService->get('StorefrontControllerPlugin.config.apiProvider');
+        $apiAccessKey = $this->systemConfigService->get('AcademyStorefrontController.config.apiAccessKey');
+        $apiProvider = $this->systemConfigService->get('AcademyStorefrontController.config.apiProvider');
 
         $response = $this->client->request('GET', 'https://api.'.$apiProvider.'.com/v1/images/search', [
             'headers' => [
@@ -41,7 +41,7 @@ class ImageController extends StorefrontController
         $data = json_decode($response->getBody()->getContents(), true);
         $imageUrl = $data[0]['url'];
 
-        return $this->renderStorefront('@StorefrontControllerPlugin/storefront/page/image.html.twig', [
+        return $this->renderStorefront('@AcademyStorefrontController/storefront/page/image.html.twig', [
             'imageUrl' => $imageUrl
         ]);
     }
