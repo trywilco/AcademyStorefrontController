@@ -1,3 +1,5 @@
+![Workflow Status](https://github.com/ShopwareAcademy/AcademyStorefrontController/actions/workflows/e2e.yml/badge.svg)
+
 # AcademyStorefrontController
 
 A plugin which shows how to create a simple Storefront controller
