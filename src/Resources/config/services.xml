@@ -7,7 +7,7 @@
     <services>
 
         <service id="ShopwareAcademy\StorefrontController\Storefront\Controller\ImageController" public="true">
-            <argument type="service" id="shopware.app_system.guzzle"/>
+            <argument type="service" id="http_client"/>
             <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
