@@ -13,9 +13,9 @@ A plugin which shows how to create a simple Storefront controller
 ## Installation
 
 1. Install and activate the plugin through the Administration UI:
-   - Go to Settings > System > Plugins
-   - Find "AcademyStorefrontController" in the plugin list
-   - Click "Install" and then "Activate"
+   - Go to Extensions > My extensions
+   - Find "Plugin with custom storefront controller" in the list
+   - Click "Install"
 
 Alternatively, you can use the command line:
 
