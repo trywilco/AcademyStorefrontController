@@ -1,5 +1,5 @@
 framework:
-  trusted_proxies: "172.18.0.1"
+  trusted_proxies: "172.0.0.0/8"
   trusted_headers:
     [
       "x-forwarded-for",
