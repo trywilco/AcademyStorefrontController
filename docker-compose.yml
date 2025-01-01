@@ -13,6 +13,7 @@ services:
       - "db_volume:/var/lib/mysql"
       - "shop_volume:/var/www/html"
       - "./config/packages/framework.yaml:/var/www/html/config/packages/framework.yaml"
+      - "./ShopwareAcademyStorefrontController:/var/www/html/custom/plugins/ShopwareAcademyStorefrontController"
     networks:
       - web
     environment:
