@@ -3,7 +3,11 @@
 
 {% block buy_widget_ordernumber_container %}
     {{ parent() }}
-    <a href="{{ path('frontend.image.show') }}" class="open-image-modal" data-ajax-modal="true"
-       data-url="{{ path('frontend.image.show') }}">View Image</a>
+    <a href="{{ path('frontend.image.show', { productId: page.product.id }) }}" 
+       class="open-image-modal" 
+       data-ajax-modal="true"
+       data-url="{{ path('frontend.image.show', { productId: page.product.id }) }}">
+        View Image
+    </a>
 {% endblock %}
 

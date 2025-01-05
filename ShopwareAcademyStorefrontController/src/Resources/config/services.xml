@@ -9,6 +9,7 @@
         <service id="ShopwareAcademy\StorefrontController\Storefront\Controller\ImageController" public="true">
             <argument type="service" id="http_client"/>
             <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <argument type="service" id="product.repository"/>
             <call method="setContainer">
                 <argument type="service" id="service_container"/>
             </call>
